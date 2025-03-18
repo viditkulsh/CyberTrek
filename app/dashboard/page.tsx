@@ -5,7 +5,6 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { GlitchText } from "@/components/glitch-text"
 import { MatrixBackground } from "@/components/matrix-background"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -87,9 +86,9 @@ export default function DashboardPage() {
         <header className="border-b border-cyan-900/50 bg-gray-900/80 backdrop-blur-sm">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
             <div className="flex items-center">
-              <GlitchText className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400">
+              <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400">
                 CYBERTREK
-              </GlitchText>
+              </div>
             </div>
 
             <div className="flex items-center gap-4">

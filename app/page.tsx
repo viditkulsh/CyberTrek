@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ConnectWallet } from "@/components/connect-wallet"
-import { GlitchText } from "@/components/glitch-text"
 import { MatrixBackground } from "@/components/matrix-background"
 import { useRouter } from "next/navigation"
 
@@ -36,9 +35,9 @@ export default function HomePage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-8"
         >
-          <GlitchText className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 mb-4">
+          <div className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-green-400 mb-4">
             CYBERTREK
-          </GlitchText>
+          </div>
           <p className="text-cyan-400 text-xl md:text-2xl font-mono">Master Cybersecurity & Blockchain</p>
         </motion.div>
 
