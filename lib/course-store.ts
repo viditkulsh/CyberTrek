@@ -1,18 +1,32 @@
-"use client"
+"use client";
 
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
-import type { Course, Achievement, LeaderboardEntry } from "./types"
-import { Shield, Lock, Database, Code, Cpu, BookOpen, Award, Zap, Trophy } from "lucide-react"
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { Course, Achievement, LeaderboardEntry, CourseModule, QuizQuestion } from "./types";
+import { Shield, Lock, Database, Code, Cpu, BookOpen, Award, Zap, Trophy } from "lucide-react";
 
+// Map of icon names to Lucide React components
+const iconMap = {
+  Shield,
+  Lock,
+  Database,
+  Code,
+  Cpu,
+  BookOpen,
+  Award,
+  Zap,
+  Trophy,
+};
+
+// Define the shape of our store
 interface CourseStore {
-  courses: Course[]
-  achievements: Achievement[]
-  leaderboard: LeaderboardEntry[]
+  courses: Course[];
+  achievements: Achievement[];
+  leaderboard: LeaderboardEntry[];
 
-  getCourse: (id: string) => Course | undefined
-  getAchievement: (id: string) => Achievement | undefined
-  updateCourseProgress: (courseId: string, moduleId: string, completed: boolean) => void
+  getCourse: (id: string) => Course | undefined;
+  getAchievement: (id: string) => Achievement | undefined;
+  updateCourseProgress: (courseId: string, moduleId: string, completed: boolean) => void;
 }
 
 export const useCourseStore = create<CourseStore>()(
@@ -25,7 +39,7 @@ export const useCourseStore = create<CourseStore>()(
           description: "Learn the fundamentals of cybersecurity and basic threat models",
           level: "Beginner",
           duration: "2 hours",
-          icon: Shield,
+          icon: "Shield", // Storing as string for later mapping
           premium: false,
           stakingRequirement: 0,
           rewardAmount: 50,
@@ -60,7 +74,7 @@ export const useCourseStore = create<CourseStore>()(
           description: "Discover the tools and techniques used by ethical hackers",
           level: "Intermediate",
           duration: "4 hours",
-          icon: Lock,
+          icon: "Lock",
           premium: true,
           stakingRequirement: 50,
           rewardAmount: 100,
@@ -94,7 +108,7 @@ export const useCourseStore = create<CourseStore>()(
           description: "Understand the core concepts behind blockchain technology",
           level: "Beginner",
           duration: "3 hours",
-          icon: Database,
+          icon: "Database",
           premium: false,
           stakingRequirement: 0,
           rewardAmount: 50,
@@ -122,69 +136,6 @@ export const useCourseStore = create<CourseStore>()(
             },
           ],
         },
-        {
-          id: "smart-contracts",
-          title: "Smart Contract Development",
-          description: "Learn to write and audit secure smart contracts",
-          level: "Advanced",
-          duration: "6 hours",
-          icon: Code,
-          premium: true,
-          stakingRequirement: 100,
-          rewardAmount: 200,
-          minStakingPeriodDays: 14,
-          modules: [
-            {
-              id: "smart-intro",
-              title: "Introduction to Smart Contracts",
-              description: "Understanding what smart contracts are and how they work",
-              content: "Smart contracts are self-executing contracts with the terms directly written into code...",
-              quizQuestions: [
-                {
-                  id: "q1",
-                  question: "What language is commonly used to write Ethereum smart contracts?",
-                  options: ["JavaScript", "Python", "Solidity", "C++"],
-                  correctAnswer: 2,
-                },
-              ],
-              completed: false,
-            },
-          ],
-        },
-        {
-          id: "cryptography",
-          title: "Applied Cryptography",
-          description: "Master the principles of modern cryptographic systems",
-          level: "Intermediate",
-          duration: "5 hours",
-          icon: Cpu,
-          premium: true,
-          stakingRequirement: 75,
-          rewardAmount: 150,
-          minStakingPeriodDays: 10,
-          modules: [
-            {
-              id: "crypto-intro",
-              title: "Introduction to Cryptography",
-              description: "Understanding the basics of encryption and decryption",
-              content: "Cryptography is the practice of secure communication in the presence of adversaries...",
-              quizQuestions: [
-                {
-                  id: "q1",
-                  question: "What is the difference between symmetric and asymmetric encryption?",
-                  options: [
-                    "Symmetric uses one key, asymmetric uses two keys",
-                    "Symmetric is faster, asymmetric is slower",
-                    "Symmetric is newer, asymmetric is older",
-                    "There is no difference",
-                  ],
-                  correctAnswer: 0,
-                },
-              ],
-              completed: false,
-            },
-          ],
-        },
       ],
 
       achievements: [
@@ -192,7 +143,7 @@ export const useCourseStore = create<CourseStore>()(
           id: "first-login",
           title: "Digital Initiate",
           description: "Log in to CyberTrek for the first time",
-          icon: Award,
+          icon: "Award",
           xpReward: 50,
           category: "general",
           difficulty: 1,
@@ -202,7 +153,7 @@ export const useCourseStore = create<CourseStore>()(
           id: "first-course",
           title: "Knowledge Seeker",
           description: "Complete your first course",
-          icon: BookOpen,
+          icon: "BookOpen",
           xpReward: 100,
           category: "learning",
           difficulty: 1,
@@ -212,40 +163,20 @@ export const useCourseStore = create<CourseStore>()(
           id: "first-stake",
           title: "Token Staker",
           description: "Stake QUEST tokens for the first time",
-          icon: Zap,
+          icon: "Zap",
           xpReward: 150,
           category: "staking",
           difficulty: 2,
           isActive: true,
         },
         {
-          id: "security-expert",
-          title: "Security Expert",
-          description: "Complete all cybersecurity courses",
-          icon: Shield,
-          xpReward: 500,
-          category: "cybersecurity",
-          difficulty: 4,
-          isActive: true,
-        },
-        {
           id: "blockchain-master",
           title: "Blockchain Master",
           description: "Complete all blockchain courses",
-          icon: Database,
+          icon: "Database",
           xpReward: 500,
           category: "blockchain",
           difficulty: 4,
-          isActive: true,
-        },
-        {
-          id: "crypto-wizard",
-          title: "Crypto Wizard",
-          description: "Complete the Applied Cryptography course with a perfect score",
-          icon: Trophy,
-          xpReward: 300,
-          category: "cryptography",
-          difficulty: 3,
           isActive: true,
         },
       ],
@@ -263,57 +194,32 @@ export const useCourseStore = create<CourseStore>()(
           level: 10,
           xp: 9200,
         },
-        {
-          name: "HackerElite",
-          wallet: "0xq1w2e3r4t5y6u7i8o9p",
-          level: 8,
-          xp: 7500,
-        },
-        {
-          name: "CipherPunk",
-          wallet: "0xa1s2d3f4g5h6j7k8l9",
-          level: 7,
-          xp: 6300,
-        },
-        {
-          name: "TokenMaster",
-          wallet: "0xz1x2c3v4b5n6m7",
-          level: 6,
-          xp: 5100,
-        },
       ],
 
-      getCourse: (id) => {
-        return get().courses.find((course) => course.id === id)
-      },
+      getCourse: (id) => get().courses.find((course) => course.id === id),
 
-      getAchievement: (id) => {
-        return get().achievements.find((achievement) => achievement.id === id)
-      },
+      getAchievement: (id) => get().achievements.find((achievement) => achievement.id === id),
 
       updateCourseProgress: (courseId, moduleId, completed) => {
-        const { courses } = get()
+        const { courses } = get();
 
         const updatedCourses = courses.map((course) => {
           if (course.id === courseId) {
             const updatedModules = course.modules.map((module) => {
               if (module.id === moduleId) {
-                return { ...module, completed }
+                return { ...module, completed };
               }
-              return module
-            })
+              return module;
+            });
 
-            return { ...course, modules: updatedModules }
+            return { ...course, modules: updatedModules };
           }
-          return course
-        })
+          return course;
+        });
 
-        set({ courses: updatedCourses })
+        set({ courses: updatedCourses });
       },
     }),
-    {
-      name: "cybertrek-course-storage",
-    },
-  ),
-)
-
+    { name: "cybertrek-course-storage" }
+  )
+);
