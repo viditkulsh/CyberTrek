@@ -144,7 +144,7 @@ export default function CoursePage() {
         addXp(course.rewardAmount)
 
         // Check for first course completion achievement
-        if (userData.completedCourses.length === 0) {
+        if (userData && userData.completedCourses.length === 0) {
           unlockAchievement("first-course")
           toast({
             title: "Achievement Unlocked!",
@@ -166,11 +166,11 @@ export default function CoursePage() {
         const blockchainCourses = ["blockchain-101", "smart-contracts"]
 
         const completedCyberSec = cybersecCourses.every(
-          (id) => userData.completedCourses.includes(id) || id === courseId,
+          (id) => userData?.completedCourses.includes(id) || id === courseId,
         )
 
         const completedBlockchain = blockchainCourses.every(
-          (id) => userData.completedCourses.includes(id) || id === courseId,
+          (id) => userData?.completedCourses.includes(id) || id === courseId,
         )
 
         if (completedCyberSec) {
@@ -326,8 +326,7 @@ export default function CoursePage() {
                   </div>
                   <Progress
                     value={calculateProgress()}
-                    className="h-2 bg-gray-800"
-                    indicatorClassName="bg-gradient-to-r from-cyan-500 to-purple-500"
+                    className="h-2 bg-gray-800 bg-gradient-to-r from-cyan-500 to-purple-500"
                   />
 
                   {isCompleted && (

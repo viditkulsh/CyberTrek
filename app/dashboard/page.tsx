@@ -136,8 +136,7 @@ export default function DashboardPage() {
                         <div className="text-sm text-gray-400 font-mono">LEVEL {userData.level}</div>
                         <Progress
                           value={calculateLevelProgress()}
-                          className="h-2 bg-gray-800"
-                          indicatorClassName="bg-gradient-to-r from-cyan-500 to-purple-500"
+                          className="h-2 bg-gray-800 bg-gradient-to-r from-cyan-500 to-purple-500"
                         />
                         <div className="text-xs text-gray-500 font-mono">
                           {userData.xp} XP / {userData.level * 1000} XP
