@@ -1,6 +1,13 @@
 "use client"
 
 import { useState } from "react"
+
+// Extend the Window interface to include the ethereum property
+declare global {
+  interface Window {
+    ethereum?: any
+  }
+}
 import { ethers } from "ethers"
 import { Button } from "@/components/ui/button"
 import { Loader2, AlertCircle } from "lucide-react"

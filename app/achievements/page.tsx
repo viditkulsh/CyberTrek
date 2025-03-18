@@ -10,6 +10,18 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowLeft, Award, BookOpen, Database, Lock, Shield, Trophy, Zap } from "lucide-react"
+import React from "react"
+
+const iconMap = {
+  ArrowLeft,
+  Award,
+  BookOpen,
+  Database,
+  Lock,
+  Shield,
+  Trophy,
+  Zap,
+};
 
 export default function AchievementsPage() {
   const router = useRouter()
@@ -152,7 +164,7 @@ export default function AchievementsPage() {
                       <CardHeader className="pb-2">
                         <div className="flex justify-between items-start">
                           <div className={unlocked ? "text-purple-400" : "text-gray-600"}>
-                            {achievement.icon && <achievement.icon className="h-6 w-6" />}
+                            {achievement.icon && React.createElement(iconMap[achievement.icon as keyof typeof iconMap], { className: "h-6 w-6" })}
                           </div>
                           <div
                             className={`px-2 py-1 rounded text-xs font-mono ${
